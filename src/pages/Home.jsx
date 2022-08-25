@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, useLayoutEffect } from "react";
 import { toast } from "react-toastify";
 import logo from "../logo.svg";
 import { useForm } from "react-hook-form";
@@ -7,12 +8,14 @@ import Skeleton from "react-loading-skeleton";
 
 function Home() {
   const id = useId();
+  const [nativeToken, setNativeToken] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fromNative, setfromNative] = useState("");
   const {
     register,
     handleSubmit,
     watch,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -21,15 +24,20 @@ function Home() {
   const onSubmit = (data) => {
     toast(`${data.example}, ${data.exampleRequired}`);
     toast(`${JSON.stringify(data)}`);
-    JSBridge.showMessageInNative(data);
-    JSBridge.showMessageInNative(JSON.stringify(data));
+    if (!!window.chrome.webview && JSBridge) {
+      JSBridge.showMessageInNative(data);
+      JSBridge.showMessageInNative(JSON.stringify(data));
+    }
     console.log(data);
   };
-  console.log(watch("example"));
+  const dataExample = watch("example");
 
+  console.log("dari app : ", window.$native());
+  const name = window.$native();
+  console.log(name);
+  toast(name);
   useEffect(() => {
-    toast("You're currently in home page");
-
+    toast(nativeToken);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -37,15 +45,12 @@ function Home() {
 
   const sendMessage = () => {
     var valueReceived = document.getElementById("inputField").value;
-    JSBridge.showMessageInNative(valueReceived);
+    // Di tambahkan handling
+    if (!!window.chrome.webview && JSBridge)
+      JSBridge.showMessageInNative(valueReceived);
   };
 
   // eslint-disable-next-line no-unused-vars
-  const updateFromNative = (message) => {
-    // document.getElementById("inputField").value = message;
-    toast(`${message}`);
-    setfromNative(message);
-  };
 
   // eslint-disable-next-line no-unused-vars
   function otherUpdateFromNative(message) {
@@ -112,9 +117,9 @@ function Home() {
             >
               {/* register your input into the hook by invoking the "register" function */}
               <div className="flex space-x-2">
-                <label htmlFor={`${id}-example`}>Input Element</label>
+                <label htmlFor={`example`}>Input Element</label>
                 <input
-                  id={`${id}-example`}
+                  id={`example`}
                   className="border-1 text-slate-700"
                   aria-label="example"
                   {...register("example")}
