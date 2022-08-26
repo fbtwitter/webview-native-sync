@@ -110,7 +110,12 @@ function Home() {
         <hr className="my-4 h-0.5 w-7/12 bg-slate-100"></hr>
         <h1 className="my-2 text-3xl font-bold">Input Element Test!</h1>
 
-        <button onClick={() => navigate("/history")}>Ke History</button>
+        <button
+          className="rounded bg-slate-600 text-white"
+          onClick={() => navigate("/history")}
+        >
+          Ke History
+        </button>
         <div className="text-base-400 text-base font-normal">
           {loading ? (
             <Skeleton width={160} height={20} baseColor={"gray"}></Skeleton>
