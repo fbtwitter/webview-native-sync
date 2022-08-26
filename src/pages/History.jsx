@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
@@ -7,7 +8,22 @@ const History = () => {
     toast(`back pressed ${window.onBackPressed}`);
   }, []);
 
-  return <div>Halaman Baru</div>;
+  const backHandler = () => {
+    if (/Android/.test(window.navigator.userAgent)) {
+      window.InterfaceObject.nativeDo({ command: "finish", data: {} });
+    } else {
+      webkit.messageHandlers.nativeDo.postMessage({
+        command: "finish",
+        data: {},
+      });
+    }
+  };
+  return (
+    <div>
+      Halaman Baru
+      <button onClick={() => backHandler()}>Coba Back Button</button>
+    </div>
+  );
 };
 
 export default History;
