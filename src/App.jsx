@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Store from "./context";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,7 +11,7 @@ window.$native = (message) => {
 
 function App() {
   const [nativeData, setNativeData] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   window.nativeData = (message) => {
     toast(`message received:  ${message}`);
@@ -24,14 +24,13 @@ function App() {
   }, [toast, nativeData]);
 
   useLayoutEffect(() => {
-    window.nativeBackPressed = (ev) => {
-      ev.preventDefault();
-      alert("Back button pressed via native");
-    };
-    window.onBackPressed = (ev) => {
-      ev.preventDefault();
-      alert("Back button pressed via on");
-    };
+    // window.nativeBackPressed = (ev) => {
+    //   ev.preventDefault();
+    //   this.goBack;
+    //   alert("Back button pressed via native");
+    // };
+    window.onBackPressed = navigate(-1);
+    window.nativeBackPressed = navigate(-1);
 
     return () => {
       window.nativeBackPressed = null;
