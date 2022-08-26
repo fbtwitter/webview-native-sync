@@ -24,8 +24,12 @@ function App() {
   }, [toast, nativeData]);
 
   useEffect(() => {
-    window.nativeBackPressed = navigate(-1);
-    window.onBackPressed = navigate(-1);
+    window.nativeBackPressed = () => {
+      alert("Back button pressed via native");
+    };
+    window.onBackPressed = () => {
+      alert("Back button pressed via on");
+    };
 
     return () => {
       window.nativeBackPressed = null;
