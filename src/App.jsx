@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Store from "./context";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 window.$native = (message) => {
   toast(`message from $ : ${message}`);
@@ -11,7 +11,7 @@ window.$native = (message) => {
 
 function App() {
   const [nativeData, setNativeData] = useState(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   window.nativeData = (message) => {
     toast(`message received:  ${message}`);
@@ -23,7 +23,7 @@ function App() {
     toast(`${nativeData}`);
   }, [toast, nativeData]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.nativeBackPressed = () => {
       alert("Back button pressed via native");
     };
