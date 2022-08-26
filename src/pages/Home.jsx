@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { useEffect, useId, useState, useLayoutEffect } from "react";
+import { useEffect, useId, useState } from "react";
 import { toast } from "react-toastify";
 import logo from "../logo.svg";
 import { useForm } from "react-hook-form";
 import Skeleton from "react-loading-skeleton";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const id = useId();
@@ -18,6 +19,7 @@ function Home() {
     getValues,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   // JSBridge
 
@@ -107,6 +109,8 @@ function Home() {
 
         <hr className="my-4 h-0.5 w-7/12 bg-slate-100"></hr>
         <h1 className="my-2 text-3xl font-bold">Input Element Test!</h1>
+
+        <button onClick={() => navigate("/history")}>Ke History</button>
         <div className="text-base-400 text-base font-normal">
           {loading ? (
             <Skeleton width={160} height={20} baseColor={"gray"}></Skeleton>
