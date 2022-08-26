@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Store from "./context";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +11,7 @@ window.$native = (message) => {
 
 function App() {
   const [nativeData, setNativeData] = useState(null);
+  const navigate = useNavigate();
 
   window.nativeData = (message) => {
     toast(`message received:  ${message}`);
@@ -21,6 +22,10 @@ function App() {
   useEffect(() => {
     toast(`${nativeData}`);
   }, [toast, nativeData]);
+
+  useEffect(() => {
+    window.nativeBackPressed = navigate(-1);
+  }, []);
 
   return (
     <Store>

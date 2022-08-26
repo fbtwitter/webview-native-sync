@@ -1,11 +1,16 @@
 /* eslint-disable no-undef */
 import { useEffect } from "react";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const History = () => {
+  const navigate = useNavigate();
+  // useEffect(() => {
+  //   toast(`back native ${window.nativeBackPressed}`);
+  //   toast(`back pressed ${window.onBackPressed}`);
+  // }, []);
+
   useEffect(() => {
-    toast(`back native ${window.nativeBackPressed}`);
-    toast(`back pressed ${window.onBackPressed}`);
+    window.nativeBackPressed = navigate(-1);
   }, []);
 
   const backHandler = () => {
