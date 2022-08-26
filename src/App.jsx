@@ -29,11 +29,15 @@ function App() {
     //   this.goBack;
     //   alert("Back button pressed via native");
     // };
-    // window.onBackPressed = navigate(-1);
-    // window.nativeBackPressed = navigate(-1);
+    window.onBackPressed = function () {
+      return navigate(-1);
+    };
+    window.nativeBackPressed = function () {
+      return navigate(-1);
+    };
 
-    window.nativeBackPressed = alert("halo");
-    window.onBackPressed = alert("halo 2");
+    // window.nativeBackPressed = alert("halo");
+    // window.onBackPressed = alert("halo 2");
 
     return () => {
       window.nativeBackPressed = null;
