@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Store from "./context";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,10 +24,12 @@ function App() {
   }, [toast, nativeData]);
 
   useLayoutEffect(() => {
-    window.nativeBackPressed = () => {
+    window.nativeBackPressed = (ev) => {
+      ev.preventDefault();
       alert("Back button pressed via native");
     };
-    window.onBackPressed = () => {
+    window.onBackPressed = (ev) => {
+      ev.preventDefault();
       alert("Back button pressed via on");
     };
 
