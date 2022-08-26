@@ -25,6 +25,12 @@ function App() {
 
   useEffect(() => {
     window.nativeBackPressed = navigate(-1);
+    window.onBackPressed = navigate(-1);
+
+    return () => {
+      window.nativeBackPressed = null;
+      window.onBackPressed = null;
+    };
   }, []);
 
   return (
