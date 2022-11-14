@@ -48,8 +48,8 @@ function Home() {
   const sendMessage = () => {
     var valueReceived = document.getElementById("inputField").value;
     // Di tambahkan handling
-    if (!!window.chrome.webview && JSBridge)
-      window.webkit.messageHandlers.nativeDo.postMessage(valueReceived);
+     if (!/Android/.test(window.navigator.userAgent)) {
+      webkit.messageHandlers.nativeDo.postMessage(valueReceived);
   };
 
   // eslint-disable-next-line no-unused-vars
