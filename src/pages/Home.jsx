@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+const Home = () => {
   const id = useId();
   const [nativeToken, setNativeToken] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -48,9 +48,10 @@ function Home() {
   const sendMessage = () => {
     var valueReceived = document.getElementById("inputField").value;
     // Di tambahkan handling
-     if (!/Android/.test(window.navigator.userAgent)) {
+    if (!/Android/.test(window.navigator.userAgent)) {
       webkit.messageHandlers.nativeDo.postMessage(valueReceived);
-  };
+    };
+  }
 
   // eslint-disable-next-line no-unused-vars
 
