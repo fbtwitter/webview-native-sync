@@ -49,7 +49,7 @@ function Home() {
     var valueReceived = document.getElementById("inputField").value;
     // Di tambahkan handling
     if (!!window.chrome.webview && JSBridge)
-      JSBridge.showMessageInNative(valueReceived);
+      window.webkit.messageHandlers.nativeDo.postMessage(valueReceived);
   };
 
   // eslint-disable-next-line no-unused-vars
