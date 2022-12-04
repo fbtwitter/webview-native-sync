@@ -50,8 +50,8 @@ const Home = () => {
     // Di tambahkan handling
     if (!/Android/.test(window.navigator.userAgent)) {
       webkit.messageHandlers.nativeDo.postMessage(valueReceived);
-    };
-  }
+    }
+  };
 
   // eslint-disable-next-line no-unused-vars
 
@@ -203,6 +203,6 @@ const Home = () => {
       </header>
     </div>
   );
-}
+};
 
 export default Home;
