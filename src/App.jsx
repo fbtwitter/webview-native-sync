@@ -3,6 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Store from "./context";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useLayoutEffect, useState } from "react";
+import { HelmetProvider } from "react-helmet-async";
 
 window.$native = (message) => {
   toast(`message from $ : ${message}`);
@@ -12,6 +13,8 @@ window.$native = (message) => {
 function App() {
   const [nativeData, setNativeData] = useState(null);
   const navigate = useNavigate();
+
+  const helmetContext = {};
 
   window.nativeData = (message) => {
     toast(`message received:  ${message}`);
@@ -47,10 +50,12 @@ function App() {
 
   return (
     <Store>
-      <div className="relative mx-auto min-h-screen max-w-screen-sm bg-[#F5F5F5]">
-        <Outlet />
-        <ToastContainer draggablePercent={60} />
-      </div>
+      <HelmetProvider context={helmetContext}>
+        <div className="relative mx-auto min-h-screen max-w-screen-sm bg-[#F5F5F5]">
+          <Outlet />
+          <ToastContainer draggablePercent={60} />
+        </div>
+      </HelmetProvider>
     </Store>
   );
 }

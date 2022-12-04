@@ -6,6 +6,7 @@ import logo from "../logo.svg";
 import { useForm } from "react-hook-form";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const id = useId();
@@ -76,6 +77,12 @@ const Home = () => {
 
   return (
     <div className="App">
+      <Helmet>
+        <title>Halaman Home!</title>
+        <meta name="theme-color" content="#ED1C24" />
+        <meta name="msapplication-navbutton-color" content="#ED1C24" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#ED1C24" />
+      </Helmet>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo react" />
         <a
